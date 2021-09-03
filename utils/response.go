@@ -27,7 +27,7 @@ func Ok() []byte{
 	return Result(0, map[string]interface{}{}, "操作成功")
 }
 func OkWithData(data interface{})[]byte {
-	return Result(0, data, "操作成功")
+	return Result(1, data, "操作成功")
 }
 
 //---------------------------------------------------------			Fail
