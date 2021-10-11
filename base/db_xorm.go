@@ -1,9 +1,9 @@
 package base
 
 import (
-	//_ "github.com/go-sql-driver/mysql"
-	"github.com/lib/pq"
 	"github.com/go-xorm/xorm"
+	//_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 	"github.com/mszhangyi/infra"
 	"github.com/sirupsen/logrus"
 	"time"
