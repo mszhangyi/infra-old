@@ -1,7 +1,8 @@
 package base
 
 import (
-	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/go-sql-driver/mysql"
+	"github.com/lib/pq"
 	"github.com/go-xorm/xorm"
 	"github.com/mszhangyi/infra"
 	"github.com/sirupsen/logrus"
@@ -21,7 +22,8 @@ type DatabaseStarter struct {
 
 func (s *DatabaseStarter) Setup() {
 	//数据库配置
-	engine, err := xorm.NewEngine("mysql", props.DataSource)
+	//engine, err := xorm.NewEngine("mysql", props.DataSource)
+	engine, err := xorm.NewEngine("postgres", props.DataSource)
 	if err != nil {
 		logrus.Panicf("数据库orm：", err)
 	}
