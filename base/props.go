@@ -45,6 +45,7 @@ type systemConf struct {
 	RedisMaxActive   int    `json:"redis_max_active"`
 	RedisPwd         string `json:"redis_pwd"`
 	RedisAddr        string `json:"redis_addr"`
+	RedisSelectDb 	 int 	`json:"redis_select_db"`
 }
 
 func (p *PropsStarter) Init() {

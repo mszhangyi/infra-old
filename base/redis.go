@@ -38,6 +38,14 @@ func (r *RedisPoolStarter) Setup() {
 					return nil, err
 				}
 			}
+			// 选择redis库
+			if props.RedisSelectDb > 0 {
+				if _, err := conn.Do("SELECT", props.RedisSelectDb); err != nil {
+					conn.Close()
+					return nil, err
+				}
+			}
+
 			return conn, err
 		},
 		TestOnBorrow: func(conn redis.Conn, t time.Time) error {
