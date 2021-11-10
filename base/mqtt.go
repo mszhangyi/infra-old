@@ -104,6 +104,7 @@ func (t *MQttStarter) startPublishMQtt(index int) {
 	if token.Wait() && token.Error() != nil {
 		panic(token.Error())
 	}
+
 	for {
 		select {
 		case t, ok := <-pubChanMap[index]:
