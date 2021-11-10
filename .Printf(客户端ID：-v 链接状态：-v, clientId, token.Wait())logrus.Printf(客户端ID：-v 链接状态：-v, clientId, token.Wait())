@@ -1,0 +1,20 @@
+warning: LF will be replaced by CRLF in base/mqtt.go.
+The file will have its original line endings in your working directory
+[1mdiff --git a/base/mqtt.go b/base/mqtt.go[m
+[1mindex 4637940..d442422 100644[m
+[1m--- a/base/mqtt.go[m
+[1m+++ b/base/mqtt.go[m
+[36m@@ -97,10 +97,11 @@[m [mfunc SendMsg(pub string, msg string) {[m
+ [m
+ //---------------------------------------------------------------------------------   启动发布Topic[m
+ func (t *MQttStarter) startPublishMQtt(index int) {[m
+[31m-	clientId := fmt.Sprintf(props.Name+"-"+fmt.Sprint(time.Now().UnixNano())+"-%d", index)[m
+[32m+[m	[32mclientId := fmt.Sprintf(props.Name+"-"+fmt.Sprint(rand.Int63n(time.Now().UnixNano()))+"-%d", index)[m
+ 	opts := getMqttOpts(clientId)[m
+ 	c := mqtt.NewClient(opts)[m
+[31m-	if token := c.Connect(); token.Wait() && token.Error() != nil {[m
+[32m+[m	[32mtoken := c.Connect()[m
+[32m+[m	[32mif token.Wait() && token.Error() != nil {[m
+ 		panic(token.Error())[m
+ 	}[m
+ 	for {[m
