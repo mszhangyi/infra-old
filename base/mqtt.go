@@ -97,7 +97,7 @@ func SendMsg(pub string, msg string) {
 
 //---------------------------------------------------------------------------------   启动发布Topic
 func (t *MQttStarter) startPublishMQtt(index int) {
-	clientId := fmt.Sprintf(props.Name+"-pub-%d", index)
+	clientId := fmt.Sprintf(props.Name+"-"+fmt.Sprint(time.Now().UnixNano())+"-%d", index)
 	opts := getMqttOpts(clientId)
 	c := mqtt.NewClient(opts)
 	if token := c.Connect(); token.Wait() && token.Error() != nil {
