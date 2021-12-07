@@ -34,13 +34,6 @@ func (t *MQttStarter) Init() {
 		pubChanMap[i] = ch
 		go t.startPublishMQtt(i)
 	}
-	//主程序客户端
-	opts := getMqttOpts(props.Name)
-	client := mqtt.NewClient(opts)
-	if token := client.Connect(); token.Wait() && token.Error() != nil {
-		panic(token.Error())
-	}
-	mClient = client
 }
 func (t *MQttStarter) Stop() {
 	//关闭服务的时候
@@ -58,20 +51,20 @@ func (t *MQttStarter) Stop() {
 }*/
 
 //--------------------------------------------------------------------------	启动订阅Topic
-func StartSubscribe(topic string, handler func(message mqtt.Message)) {
-	var handlerMeg mqtt.MessageHandler
-	if handler == nil {
-		handlerMeg = func(client mqtt.Client, message mqtt.Message) {}
-	} else {
-		handlerMeg = func(client mqtt.Client, message mqtt.Message) {
-			go handlerRecover(handler, message)
-		}
-	}
-	token := mClient.Subscribe(topic, 0, handlerMeg)
-	if token.Wait() && token.Error() != nil {
-		fmt.Println(token.Error())
-	}
-}
+//func StartSubscribe(topic string, handler func(message mqtt.Message)) {
+//	var handlerMeg mqtt.MessageHandler
+//	if handler == nil {
+//		handlerMeg = func(client mqtt.Client, message mqtt.Message) {}
+//	} else {
+//		handlerMeg = func(client mqtt.Client, message mqtt.Message) {
+//			go handlerRecover(handler, message)
+//		}
+//	}
+//	token := mClient.Subscribe(topic, 0, handlerMeg)
+//	if token.Wait() && token.Error() != nil {
+//		fmt.Println(token.Error())
+//	}
+//}
 
 //异常捕捉   防止panic终止程序
 func handlerRecover(handler func(message mqtt.Message), message mqtt.Message) {
